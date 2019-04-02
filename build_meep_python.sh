@@ -7,7 +7,7 @@ MY_LDFLAGS="-L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/hdf5/serial ${RPATH_FLA
 MY_CPPFLAGS="-I/usr/local/include -I/usr/include/hdf5/serial"
 
 apt-get update
-apt-get -y install libblas-dev liblapack-dev libgmp-dev swig libgsl-dev autoconf pkg-config libpng16-dev git guile-2.0-dev libhdf5-dev hdf5-tools libfftw3-dev libpython3.5-dev python3-numpy python3-h5py
+apt-get -y install libblas-dev liblapack-dev libgmp-dev swig libgsl-dev autoconf pkg-config libpng16-dev git guile-2.0-dev libhdf5-dev hdf5-tools libfftw3-dev libpython3.5-dev python3-numpy python3-h5py python3-scipy
 
 mkdir -p ~/install
 
