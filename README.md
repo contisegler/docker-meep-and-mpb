@@ -4,28 +4,28 @@ This repository contains the dockerfile to create the image pymeep hosted at [ht
 For more information on MEEP visist the official page at [https://meep.readthedocs.io/en/latest/](https://meep.readthedocs.io/en/latest/)
 
 # TODOs
-Currently a 'latest? tag is missing. Furthermore the linking between meep and python was added to the Dockerfile but the image on Docker Hub is not up-to-date yet.
-- [ ] Create version from latest Dockerfile
-- [ ] Add tag "latest" to Docker hub
+- [ ] Investigae login messege: `LD_LIBRARY_PATH=/usr/local/lib:/usr/lib/x86_64-linux-gnu/hdf5/serial: No such file or directory`
+- [x] Create version from latest Dockerfile
+- [x] Add tag "latest" to Docker hub
 
 # Getting the image from docker hub
 ```sh
-docker pull scimax/pymeepimage
+docker pull contisegler/pymeep
 ```
 
 # Run the image in interactive mode
 ```sh
-docker run -it -v C:/path/to/host/directory:/home/hostSRC -v D:/:/home/hostSRC/Simulation-results pymeepimage
+docker run -it --name=<container name> -v /path/to/host/directory:/home/hostSRC -v /path/to/host/Simulation-resutls:/home/hostSRC/Simulation-results contisegler/pymeep
 ```
 This will create a new image which you can restart after exiting the container with
 ```sh
-docker start -i <container ID>
+docker start -i <container name>
 ```
 
 # Build the image using dockerfile
 To build the image place the dockerfile in a directory together with the shell script. Run
 ```sh
-docker build -t pymeepimage .
+docker build -t pymeep .
 ```
 
 # Other useful commands
