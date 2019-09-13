@@ -13,7 +13,7 @@ docker pull contisegler/pymeep:<version>
 
 # Run the image in interactive mode
 ```sh
-docker run -it --name=<container name> -v /path/to/host/directory:/home/pymeep contisegler/pymeep:<version>
+docker run -it --name=<container name> -v /path/to/host/directory:/home/pymeep/host contisegler/pymeep:<version>
 ```
 This will create a new image which you can restart after exiting the container with
 ```sh
