@@ -43,7 +43,8 @@ USER pymeep
 ADD check_installs.sh /home/pymeep
 RUN /bin/bash /home/pymeep/check_installs.sh
 
-RUN printf 'export PYTHONPATH="/usr/local/lib/python3.6/site-packages"\n\
+RUN printf 'export PATH="/home/pymeep/.local/bin:${PATH}"\n\
+export PYTHONPATH="/usr/local/lib/python3.6/site-packages:/home/pymeep/.local/lib/python3.6/site-packages"\n\
 export RPATH_FLAGS="-Wl,-rpath,/usr/local/lib:/usr/lib/x86_64-linux-gnu/hdf5/openmpi"\n\
 export LDFLAGS="-L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/hdf5/openmpi ${RPATH_FLAGS}"\n\
 export CPPFLAGS="-I/usr/local/include -I/usr/include/hdf5/openmpi"\n' >> ~/.bashrc
