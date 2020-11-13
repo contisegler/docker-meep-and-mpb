@@ -3,12 +3,9 @@ FROM ubuntu:18.04
 LABEL maintainer="hendrik.preuss@tuhh.de"
 
 RUN apt-get update && apt-get install -y \
-    wget \
-    vim  \
-    nano \
-    git
-
-RUN apt-get update && apt-get install -y \
+    wget                    \
+    vim                     \
+    nano                    \
     build-essential         \
     gfortran                \
     libblas-dev             \
@@ -29,25 +26,22 @@ RUN apt-get update && apt-get install -y \
     python3-scipy           \
     python3-pip             \
     ffmpeg                  \
-    libmatheval-dev
+    libmatheval-dev         \
+    && apt-get clean
 
-RUN mkdir /home/pymeep && mkdir /home/pymeep/host
+RUN useradd -m pymeep
+
 ADD build_meep_python.sh /home/pymeep
 RUN /bin/bash /home/pymeep/build_meep_python.sh
-
-RUN groupadd -g 999 pymeep && \
-    useradd -r -u 999 -g pymeep pymeep && \
-    chown -R pymeep:pymeep /home/pymeep
-USER pymeep
-
-ADD check_installs.sh /home/pymeep
-RUN /bin/bash /home/pymeep/check_installs.sh
 
 RUN printf 'export PATH="/home/pymeep/.local/bin:${PATH}"\n\
 export PYTHONPATH="/usr/local/lib/python3.6/site-packages:/home/pymeep/.local/lib/python3.6/site-packages"\n\
 export RPATH_FLAGS="-Wl,-rpath,/usr/local/lib:/usr/lib/x86_64-linux-gnu/hdf5/openmpi"\n\
 export LDFLAGS="-L/usr/local/lib -L/usr/lib/x86_64-linux-gnu/hdf5/openmpi ${RPATH_FLAGS}"\n\
-export CPPFLAGS="-I/usr/local/include -I/usr/include/hdf5/openmpi"\n' >> ~/.bashrc
+export CPPFLAGS="-I/usr/local/include -I/usr/include/hdf5/openmpi"\n\
+umask 0002\n' >> /home/pymeep/.bashrc
 
+USER pymeep
+RUN mkdir /home/pymeep/host
 VOLUME /home/pymeep/host
 WORKDIR /home/pymeep/host

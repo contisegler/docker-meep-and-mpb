@@ -48,3 +48,13 @@ git clone --branch v1.16.1 https://github.com/NanoComp/meep.git
 cd meep/
 sh autogen.sh --enable-shared --with-mpi --with-openmp PYTHON=python3 LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}"
 make && make install
+
+
+## check install
+chown -R pymeep:pymeep /home/pymeep
+su -c "cd /home/pymeep/install/meep && make check" - pymeep
+su -c "cd /home/pymeep/install/mpb && make check" - pymeep
+
+
+## remove installtion files
+rm -r /home/pymeep/install
