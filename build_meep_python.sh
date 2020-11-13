@@ -23,13 +23,13 @@ make && make install
 cd /home/pymeep/install
 git clone --branch 1.13.1 https://github.com/NanoComp/h5utils.git
 cd h5utils/
-sh autogen.sh CC=mpicc LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}"
+sh autogen.sh CC=mpicc CXX=mpic++ LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}"
 make && make install
 
 cd /home/pymeep/install
 git clone --branch v1.11.1 https://github.com/NanoComp/mpb.git
 cd mpb/
-sh autogen.sh --enable-shared CC=mpicc LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}" --with-hermitian-eps
+sh autogen.sh --enable-shared CC=mpicc CXX=mpic++ LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}" --with-hermitian-eps
 make && make install
 
 cd /home/pymeep/install
@@ -46,7 +46,7 @@ pip3 install matplotlib>3.0.0
 cd /home/pymeep/install
 git clone --branch v1.16.1 https://github.com/NanoComp/meep.git
 cd meep/
-sh autogen.sh --enable-shared --with-mpi --with-openmp PYTHON=python3 LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}"
+sh autogen.sh --enable-shared --with-mpi --with-openmp PYTHON=python3 CC=mpicc CXX=mpic++ LDFLAGS="${MY_LDFLAGS}" CPPFLAGS="${MY_CPPFLAGS}"
 make && make install
 
 
